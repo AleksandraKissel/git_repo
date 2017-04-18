@@ -81,7 +81,6 @@ public class Main {
         for (int i = 0; i < array.length; i++) {
             mult *= array[i];
         }
-        return Math.pow(mult, 1 / root);
+        return Math.pow(mult, 1/root);
     }
-
 }
