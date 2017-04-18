@@ -39,7 +39,7 @@ public class Main {
             } while (!exitSymbol.equals(stringCommand));
             System.out.println("Всего доброго!");
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так, программ будет закрыта");
+            System.out.println("Что-то пошло не так, программа будет закрыта");
         }
     }
 
