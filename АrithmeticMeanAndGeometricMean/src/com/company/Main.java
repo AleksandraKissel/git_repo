@@ -21,38 +21,43 @@ public class Main {
                 System.out.println("Для выхода введите " + exitSymbol);
                 stringCommand = in.nextLine();
                 command = stringCommand.split(" ");
-                arrayNum = arrayNumber(command);
-                if(exception) {
-                    switch (command[0]) {
-                        case arithmeticMean:
-                            System.out.printf("Среднее арифметическое: %.2f\n\n", arithmeticMean(arrayNum));
-                            break;
-                        case geometricMean:
-                            System.out.printf("Среднее геометрическое: %.2f\n\n", geometricMean(arrayNum));
-                            break;
-                        case exitSymbol:
-                            System.out.println("Всего доброго!");
-                            break;
-                        default:
-                            System.out.println("Неверная команда");
+                if (!command[0].equals(exitSymbol)) {
+                    arrayNum = arrayNumber(command);
+                    if (!command[0].equals(exitSymbol)&& exception) {
+                        switch (command[0]) {
+                            case arithmeticMean:
+                                System.out.printf("Среднее арифметическое: %.2f\n\n", arithmeticMean(arrayNum));
+                                break;
+                            case geometricMean:
+                                System.out.printf("Среднее геометрическое: %.2f\n\n", geometricMean(arrayNum));
+                                break;
+                            default:
+                                System.out.println("Неверная команда");
+                        }
                     }
                 }
             } while (!exitSymbol.equals(stringCommand));
+            System.out.println("Всего доброго!");
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так");
+            System.out.println("Что-то пошло не так, программ будет закрыта");
         }
     }
 
     private static float[] arrayNumber(String[] stringCommand) {
         float[] arrayNumber = new float[stringCommand.length - 1];
         try {
-            for (int i = 0; i < arrayNumber.length; i++) {
-                arrayNumber[i] = Float.parseFloat(stringCommand[i + 1]);
-                if (arrayNumber[i]<0){
-                    System.out.println("Вы ввели неправильные аргументы, числа должны быть положительными.\n");
-                    exception = false;
-                    break;
+            if (arrayNumber.length >= 2) {
+                for (int i = 0; i < arrayNumber.length; i++) {
+                    arrayNumber[i] = Float.parseFloat(stringCommand[i + 1]);
+                    if (arrayNumber[i] < 0) {
+                        System.out.println("Вы ввели неправильные аргументы, числа должны быть положительными.\n");
+                        exception = false;
+                        break;
+                    }
                 }
+            } else {
+                System.out.println("Вы должны ввести хотя бы два числа\n");
+                exception = false;
             }
         } catch (Exception e) {
             System.out.println("Вы ввели неправильные аргументы.\n");
@@ -63,10 +68,6 @@ public class Main {
 
 
     private static float arithmeticMean(float[] array) {
-        for (int i = 0; i <array.length ; i++) {
-            System.out.print(" " + array[i]);
-        }
-        System.out.println();
         float sum = 0;
         for (int i = 0; i < array.length; i++) {
             sum += array[i];
